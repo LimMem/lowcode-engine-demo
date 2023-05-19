@@ -5,12 +5,16 @@ import HOC from '@/engine-context/ComponentHoc';
 type DSLType = Record<string, any>;
 
 
+const freeze = (object: any) => {
+  return Object.freeze({...object});
+}
+
 interface ComponentProps {
   forwardRef: (ref: any) => void;
   platform: string;
   schema: DSLType;
   ctx: any;
-  children?: React.ReactNode[]
+  children?: React.ReactNode[];
 }
 
 const createComponentInstance = (schema: DSLType, children?:  React.ReactNode[]) => {
@@ -24,7 +28,7 @@ const createComponentInstance = (schema: DSLType, children?:  React.ReactNode[])
     compName: schema.compName || schema.type,
     ctx: schema.$$ctx,
     updateComponent: null,
-    next: null,
+    preProps: null,
     props: {},
     children,
     isContainer: schema.isContainer
@@ -32,10 +36,9 @@ const createComponentInstance = (schema: DSLType, children?:  React.ReactNode[])
 
   return instance;
 }
-
 class Component extends React.Component<ComponentProps> {
   schema: { $$platform: string; $$ctx: any };
-  instance: { id: any; schema: DSLType; Component: any; compName: any; ctx: any; updateComponent: null | Function; next: null; props: {}; children: React.ReactNode[] | undefined; isContainer: any; };
+  instance: { id: any; schema: DSLType; Component: any; compName: any; ctx: any; updateComponent: null | Function; preProps: any; props: {}; children: React.ReactNode[] | undefined; isContainer: any; };
   constructor(props: ComponentProps) {
     super(props);
     this.schema = {
@@ -45,18 +48,17 @@ class Component extends React.Component<ComponentProps> {
     };
     this.instance = createComponentInstance(this.schema, props.children);
     this.setupComponent();
-    this.props.forwardRef(this.instance);
   }
 
   /**
    * 更新组件
    */
-  updateComponent = () => {
-    const { next } = this.instance;
+  updateComponent = (next: {}) => {
     if (next) {
+      // 记录上次的属性，可能没啥用
+      this.instance.preProps = this.instance.props;
       this.instance.props = next;
     }
-    this.instance.next = null;
     this.forceUpdate();
   };
 
@@ -64,10 +66,10 @@ class Component extends React.Component<ComponentProps> {
    * 设置组件
    */
   setupComponent = () => {
-    // 绑定副作用
-    this.instance.ctx.bindEffect(this.instance);
-    this.instance.ctx.initProps(this.instance);
     this.instance.updateComponent = this.updateComponent;
+    this.instance.props = this.instance.ctx.initProps(freeze(this.instance));
+    // 绑定副作用
+    this.instance.ctx.bindEffect(freeze(this.instance));
   };
 
   /**
@@ -81,12 +83,15 @@ class Component extends React.Component<ComponentProps> {
     const Component = HOC(this.instance.Component);
     const { children, isContainer, ctx } = this.instance;
 
-    const props: Record<string, any> = { ...this.instance.props }
+    const props: Record<string, any> = {
+      ...this.instance.props,
+      ref: this.props.forwardRef,
+    }
     if (isContainer) {
       props.children = children;
     }
-
-    const e = ctx.runCmd({...this.instance});
+    // 触发指令系统，生成事件
+    const e = ctx.runCmd(freeze(this.instance), this.props.ctx.refs);
     return <Component {...props} {...e} dangerouslySetContext={this.dangerouslySetContext} />;
   }
 }

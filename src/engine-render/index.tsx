@@ -21,11 +21,12 @@ class Render extends React.Component {
         initProps: (instance: any) => {
           return meta.initProps(instance);
         },
-        runCmd: (instance: any) => {
+        runCmd: (instance: any, refs: any) => {
           // 指令处理
           if (instance.compName === 'Button') {
             return {
               onClick: () => {
+                console.log(refs[instance.id].getProps());
                 meta.data.updateComponent();
               }
             }

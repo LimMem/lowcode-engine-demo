@@ -21,7 +21,7 @@ class BaseRenderer {
   /**
    * 存储组件
    */
-  private componentRef: Map<CompUniqueId, componentRef> = new Map();
+  private componentRef: Record<CompUniqueId, componentRef> = {};
 
   private schema: Record<string, any> = {};
 
@@ -39,18 +39,6 @@ class BaseRenderer {
 
   // 数据初始化
   protected async init() {}
-
-  // /**
-  //  * 刷新指定组件
-  //  * @param id
-  //  */
-  // public refresh = (compId: CompUniqueId | CompUniqueId[], context: any) => {
-  //   const componentsId = Array.isArray(compId) ? compId : [compId];
-  //   componentsId.forEach((id) => {
-  //     const component = this.componentRef.get(id);
-  //     component?.forceUpdate(context);
-  //   });
-  // };
 
   /**
    * 开始渲染逻辑
@@ -94,7 +82,7 @@ class BaseRenderer {
   protected componentWillRender(options: any) {}
 
   private getRef = (ref: any, id: string) => {
-    this.componentRef.set(id, ref);
+    this.componentRef[id] = ref;
   };
 
   protected component() {
@@ -108,12 +96,14 @@ class BaseRenderer {
         key: id,
         schema: it,
         forwardRef: (ref: any) => {
+          // 组件调用触发
           this.getRef(ref, id);
         },
         platform: this.props.platform,
         ctx: {
           ...this.props.ctx,
-          render: this
+          render: this,
+          refs: this.componentRef
         },
       };
       return isContainer ? (

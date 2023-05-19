@@ -28,13 +28,12 @@ class ReactiveEffect {
 
   data = new DataSource({
     onChange: (target: any, p: any, newValue: { name: any; }) => {
-
       const instance = this.nodeMap.get('Button_833972');
-      instance.next = {
+      const next = {
         ...instance.props,
         children: newValue.name
       }
-      instance.updateComponent();
+      instance.updateComponent(next);
     },
   });
 
@@ -53,7 +52,7 @@ class ReactiveEffect {
   }
 
   initProps(instance: any) {
-    instance.props = {
+    const props = {
       ...instance.schema.props,
       style: {
         ...instance.schema.style,
@@ -61,10 +60,10 @@ class ReactiveEffect {
       }
     };
     if (
-      typeof instance.props.children === 'string' &&
-      instance.props.children.indexOf('$') > -1
+      typeof instance.schema.props.children === 'string' &&
+      instance.schema.props.children.indexOf('$') > -1
     ) {
-      instance.props.children = evalVariableExpression(
+      props.children = evalVariableExpression(
         instance.schema.props.children,
         {
           context: {
@@ -73,6 +72,7 @@ class ReactiveEffect {
         },
       );
     }
+    return props;
   }
 }
 
