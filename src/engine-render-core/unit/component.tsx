@@ -33,11 +33,6 @@ const createComponentInstance = (schema: DSLType, children?:  React.ReactNode[])
   return instance;
 }
 
-/**
- * setupComponent -> setupStatefulComponent -> finishComponentSetup -> applyOptions -> instance.data = reactive(data)
- *
- */
-
 class Component extends React.Component<ComponentProps> {
   schema: { $$platform: string; $$ctx: any };
   instance: { id: any; schema: DSLType; Component: any; compName: any; ctx: any; updateComponent: null | Function; next: null; props: {}; children: React.ReactNode[] | undefined; isContainer: any; };
