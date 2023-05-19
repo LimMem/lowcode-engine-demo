@@ -1,0 +1,328 @@
+{
+	"id": "835623",
+	"pageContainerType": "Page",
+	"events": [],
+	"actions": [],
+	"pageName": "渲染引擎流程",
+	"pagePath": "/xuanranyinqingliucheng2439",
+	"pageLayout": "BaseLayout",
+	"pageDynamicFlag": false,
+	"catalogItemId": "-1",
+	"ignoreLogin": false,
+	"layout": "BaseLayout",
+	"searchParams": [
+		{
+			"name": "业务主键",
+			"code": "bizId"
+		},
+		{
+			"name": "业务场景",
+			"code": "sceneCode"
+		},
+		{
+			"name": "业务数据",
+			"code": "bizData"
+		}
+	],
+	"style": {
+
+	},
+	"setEvents": [
+		{
+			"dataName": "event",
+			"dataId": "4238328",
+			"children": [],
+			"path": [],
+			"value": "useEffect",
+			"params": []
+		}
+	],
+	"editorVersion": "0.2.1130.05181449",
+	"createdEditorVersion": "0.2.1130.05181449",
+	"terminalType": "APP",
+	"compState": [
+		{
+			"name": "业务主键",
+			"code": "bizId"
+		},
+		{
+			"name": "业务场景",
+			"code": "sceneCode"
+		},
+		{
+			"name": "业务数据",
+			"code": "bizData"
+		}
+	],
+	"extras": {
+		"multiForm": true
+	},
+	"platformType": "LowCode",
+	"imgInfoList": [],
+	"appId": "772790966277644288",
+	"pageId": "976379841648615424",
+	"busiObjectExtServiceRels": null,
+	"components": [
+		{
+			"id": "View_835623_1",
+			"label": "布局容器",
+			"compName": "View",
+			"compType": 0,
+			"compLib": "@/components",
+			"props": {
+				"name": "页面",
+				"backgroundType": {
+					"type": "cleanColor",
+					"color": "rgba(201, 25, 25, 1)"
+				}
+			},
+			"style": {
+				"height": "100%",
+				"display": "block",
+				"padding": "12px 12px 12px 12px",
+				"flexDirection": "column",
+				"overflowY": "auto",
+				"backgroundColor": "rgba(201, 25, 25, 1)"
+			},
+			"isContainer": true,
+			"isBusiObjContainer": false,
+			"cmdgroup": [
+				"basic"
+			],
+			"platform": "h5",
+			"description": "",
+			"image": "",
+			"groupsName": "容器",
+			"icon": "View",
+			"setEvents": [],
+			"type": "View",
+			"isLabelDropBoxChild": false,
+			"components": [
+				{
+					"id": "View_091081",
+					"label": "布局容器",
+					"compName": "View",
+					"type": "View",
+					"compType": 0,
+					"compLib": "@/components",
+					"props": {
+						"name": "布局容器",
+						"visible": 1,
+						"backgroundType": {
+							"type": "cleanColor",
+							"color": "rgba(31, 19, 92, 1)"
+						}
+					},
+					"style": {
+						"display": "flex",
+						"flexDirection": "column",
+						"position": "static",
+						"padding": "12px 0px 12px 0px",
+						"width": "100%",
+						"borderStyle": "solid",
+						"borderWidth": 0,
+						"borderRadius": "0px 0px 0px 0px",
+						"border": "0px",
+						"backgroundColor": "rgba(31, 19, 92, 1)"
+					},
+					"isContainer": true,
+					"isBusiObjContainer": false,
+					"cmdgroup": [
+						"basic"
+					],
+					"platform": "h5",
+					"description": "",
+					"image": "",
+					"groupsName": "容器",
+					"icon": "View",
+					"setEvents": [],
+					"isLabelDropBoxChild": false,
+					"components": [
+						{
+							"id": "View_782547",
+							"label": "布局容器",
+							"compName": "View",
+							"type": "View",
+							"compType": 0,
+							"compLib": "@/components",
+							"props": {
+								"name": "布局容器",
+								"visible": 1,
+                "backgroundColor": "rgba(65, 117, 5, 1)"
+							},
+							"style": {
+								"display": "flex",
+								"flexDirection": "column",
+								"position": "static",
+								"padding": "12px 0px 12px 0px",
+								"width": "100%",
+								"borderStyle": "solid",
+								"borderWidth": 0,
+								"borderRadius": "0px 0px 0px 0px",
+								"border": "0px",
+								"backgroundColor": "rgba(65, 117, 5, 1)"
+							},
+							"isContainer": true,
+							"isBusiObjContainer": false,
+							"cmdgroup": [
+								"basic"
+							],
+							"platform": "h5",
+							"description": "",
+							"image": "",
+							"groupsName": "容器",
+							"icon": "View",
+							"setEvents": [],
+							"isLabelDropBoxChild": false,
+							"components": [
+								{
+									"id": "Button_833972",
+									"label": "按钮",
+									"compName": "Button",
+									"type": "Button",
+									"compType": 1,
+									"compLib": "@/components",
+									"props": {
+										"name": "按钮",
+										"btnIcon": false,
+										"type": "primary",
+										"size": "large",
+										"loading": false,
+										"mImagePostion": "left",
+										"shape": "default",
+										"status": "1",
+										"children": "$data.test.name$"
+									},
+									"style": {
+										"textAlign": "center",
+										"color": "#fff",
+										"fontSize": 18,
+										"fontWeight": 400,
+										"height": "48px"
+									},
+									"isContainer": false,
+									"isBusiObjContainer": false,
+									"cmdgroup": [
+										"basic"
+									],
+									"platform": "h5",
+									"description": "",
+									"image": "",
+									"groupsName": "基础",
+									"transform": {
+										"value": "children"
+									},
+									"icon": "Button",
+									"setEvents": [],
+									"isLabelDropBoxChild": false,
+									"components": [],
+									"path": [
+										"835623",
+										"View_835623_1",
+										"View_091081",
+										"View_782547"
+									]
+								}
+							],
+							"path": [
+								"835623",
+								"View_835623_1",
+								"View_091081"
+							]
+						}
+					],
+					"path": [
+						"835623",
+						"View_835623_1"
+					]
+				},
+				{
+					"id": "Input_380069",
+					"label": "输入框",
+					"compName": "Input",
+					"type": "Input",
+					"compType": 2,
+					"compLib": "@/components",
+					"props": {
+						"name": "输入框",
+						"placeholder": "请输入",
+						"textarea": false,
+						"type": "text"
+					},
+					"style": {
+						"textAlign": "left",
+						"width": "100%",
+						"backgroundColor": "#fff"
+					},
+					"isContainer": false,
+					"isBusiObjContainer": false,
+					"cmdgroup": [
+						"basic"
+					],
+					"platform": "h5",
+					"setEvents": [],
+					"description": "",
+					"image": "",
+					"groupsName": "基础",
+					"icon": "Input",
+					"isLabelDropBoxChild": false,
+					"components": [],
+					"path": [
+						"835623",
+						"View_835623_1"
+					]
+				},
+				{
+					"id": "Button_947304",
+					"label": "按钮",
+					"compName": "Button",
+					"type": "Button",
+					"compType": 1,
+					"compLib": "@/components",
+					"props": {
+						"name": "按钮",
+						"btnIcon": false,
+						"type": "primary",
+						"size": "large",
+						"loading": false,
+						"mImagePostion": "left",
+						"shape": "default",
+						"status": "1",
+						"children": "按钮"
+					},
+					"style": {
+						"textAlign": "center",
+						"color": "#fff",
+						"fontSize": 18,
+						"fontWeight": 400,
+						"height": "48px"
+					},
+					"isContainer": false,
+					"isBusiObjContainer": false,
+					"cmdgroup": [
+						"basic"
+					],
+					"platform": "h5",
+					"description": "",
+					"image": "",
+					"groupsName": "基础",
+					"transform": {
+						"value": "children"
+					},
+					"icon": "Button",
+					"setEvents": [],
+					"isLabelDropBoxChild": false,
+					"components": [],
+					"path": [
+						"835623",
+						"View_835623_1"
+					]
+				}
+			],
+			"path": [
+				"835623"
+			]
+		}
+	],
+	"path": []
+}
