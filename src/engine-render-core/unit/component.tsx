@@ -1,6 +1,8 @@
 import React from 'react';
 import assetHelper from '@/engine-assets';
 import HOC from '@/engine-context/ComponentHoc';
+// @ts-ignore
+import _ from 'lodash';
 
 type DSLType = Record<string, any>;
 
@@ -59,7 +61,11 @@ class Component extends React.Component<ComponentProps> {
       this.instance.preProps = this.instance.props;
       this.instance.props = next;
     }
-    this.forceUpdate();
+
+    // 这里做优化处理，数据深度比较不相等才强制刷新
+    if (!_.isEqual(next, this.instance.preProps)) {
+      this.forceUpdate();
+    }
   };
 
   /**

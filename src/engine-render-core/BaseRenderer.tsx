@@ -1,6 +1,9 @@
 import React from 'react';
 import Component from './unit/component';
 
+export const RenderContext = React.createContext<any>(null as any);
+
+
 interface componentRef {
 }
 
@@ -89,9 +92,23 @@ class BaseRenderer {
     return Component;
   }
 
+  /**
+   * 组件预处理
+   * @param schema
+   * @returns
+   */
+  protected preprocessComponent(schema: any) {
+    return schema;
+  }
+
   private renderComponents(schema: any[], item?: any, i?: number) {
     return schema.map((it) => {
-      const { components, isContainer, id } = it;
+      const preId = it.id;
+      const component = this.preprocessComponent(it) ?? it;
+      const { components, isContainer, id } = component;
+      if (preId !== id) {
+        throw new Error(`组件id是只读属性，不能被修改`);
+      }
       const props = {
         key: id,
         schema: it,
@@ -117,6 +134,13 @@ class BaseRenderer {
   }
 
   /**
+   * 消费，保证引擎渲染完成时机正确
+   */
+  private async consumeRender() {
+    Promise.resolve().then(() =>  this.engineRenderEnd());
+  }
+
+  /**
    * 开始渲染
    */
   render() {
@@ -124,7 +148,7 @@ class BaseRenderer {
     const render = this.root(
       this.context(this.renderComponents(this.schema.components)),
     );
-    this.engineRenderEnd();
+    this.consumeRender();
     return render;
   }
 }
